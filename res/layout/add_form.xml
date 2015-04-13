@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/add_form_parent_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+	
+    <RelativeLayout
+        android:id="@+id/add_form_header"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/headerColor" >
+
+        <ImageButton
+            android:id="@+id/add_form_button_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="6dp"
+            android:background="@null"
+            android:contentDescription="@string/back"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_angle_left_selector" />
+
+        <TextView
+            android:id="@+id/add_form_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/add_form_button_back"
+            android:text="@string/title"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white" />
+
+    </RelativeLayout> 
+    
+    <Button
+        android:id="@+id/add_form_tambah_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/add_form_header"
+        android:layout_margin="15dp"
+        android:background="@drawable/rect_blue_flat_selector"
+        android:text="@string/add_field"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white" />
+
+    <Button
+        android:id="@+id/add_form_button_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/add_form_tambah_input"
+        android:layout_toLeftOf="@+id/add_form_tambah_input"
+        android:background="@drawable/rect_orange_flat_selector"
+        android:text="@string/save"
+        android:textColor="@android:color/white" />
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/headerColor"
+        android:layout_below="@+id/add_form_tambah_input"
+        android:layout_margin="5dp"/>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="@string/add_field_instruction"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+   
+  	<ScrollView
+       	    android:id="@+id/scrollView1"
+       	    android:layout_width="fill_parent"
+       	    android:layout_height="fill_parent"  
+	        android:layout_below="@+id/textView1">
+       
+       	<LinearLayout
+	        android:id="@+id/add_form_container"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginBottom="5dp"
+	        android:layout_marginTop="10dp"
+	        android:orientation="vertical" >
+	    </LinearLayout>
+      	
+    </ScrollView>
+
+</RelativeLayout>

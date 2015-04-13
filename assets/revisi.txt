@@ -1,0 +1,6 @@
+Senin, 30 Maret 2015
+
+- placeholder untuk radio button
+- tombol save dan clear saat tambah form di atas popup
+- checkbox untuk detail dimensi
+- data tabulasi

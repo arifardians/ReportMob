@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/rect_border" >
+	
+     <RelativeLayout
+        android:id="@+id/popup_action_form"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/popup_container_form" >
+        
+        <Button
+            android:id="@+id/popup_button_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rect_blue_flat_selector"
+            android:text="@string/submit"
+            android:textColor="@color/white" />
+
+    	<Button
+    	    android:id="@+id/popup_button_cancel"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:layout_alignBaseline="@+id/popup_button_submit"
+    	    android:layout_alignBottom="@+id/popup_button_submit"
+    	    android:layout_toLeftOf="@+id/popup_button_submit"
+    	    android:background="@drawable/rect_orange_flat_selector"
+    	    android:text="@string/cancle"
+    	    android:layout_marginRight="10dp"
+    	    android:textColor="@color/white" />
+         
+    </RelativeLayout>
+    
+    <RelativeLayout 
+        android:id="@+id/popup_container_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/popup_action_form">
+
+        <TextView
+            android:id="@+id/form_preview_header_text"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@color/appColorBlue"
+            android:gravity="center"
+            android:text="@string/add_form_field"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:typeface="sans" />
+
+	    <TextView
+	        android:id="@+id/form_text_label"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/form_preview_header_text"
+	        android:layout_margin="10dp"
+	        android:text="@string/field_name"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	    <EditText
+	        android:id="@+id/popup_input_nama"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/form_text_label"
+	        android:layout_alignBottom="@+id/form_text_label"
+	        android:layout_alignLeft="@+id/popup_input_placeholder"
+	        android:layout_alignParentRight="true"
+	        android:layout_marginRight="0dp"
+	        android:background="@drawable/rect_border"
+	        android:ems="10"
+	        android:hint="@string/field_name"
+	        android:inputType="textPersonName" >
+	
+	        <requestFocus />
+	    </EditText>
+	
+	    <EditText
+	        android:id="@+id/popup_input_placeholder"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/form_text_placeholder"
+	        android:layout_alignBottom="@+id/form_text_placeholder"
+	        android:layout_alignParentRight="true"
+	        android:layout_marginRight="0dp"
+	        android:layout_toRightOf="@+id/form_text_placeholder"
+	        android:background="@drawable/rect_border"
+	        android:ems="10"
+	        android:hint="@string/placeholder"
+	        android:inputType="textPersonName" >
+	
+	    </EditText>
+	
+	    <TextView
+	        android:id="@+id/form_preview_form_desc"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/form_text_label"
+	        android:layout_below="@+id/form_text_placeholder"
+	        android:layout_marginTop="17dp"
+	        android:text="@string/input_type"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	    <Spinner
+	        android:id="@+id/popup_spinner_tipe_input"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/popup_input_placeholder"
+	        android:layout_below="@+id/form_text_placeholder"
+	        android:spinnerMode="dialog" />
+	
+	    <TextView
+	        android:id="@+id/maintenance_title"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/popup_spinner_tipe_input"
+	        android:layout_margin="10dp"
+	        android:text="@string/data_type"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	    <Spinner
+	        android:id="@+id/popup_spinner_tipe_data"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/popup_spinner_tipe_input"
+	        android:layout_toRightOf="@+id/form_text_label"
+	        android:spinnerMode="dialog" />
+	
+	    <TextView
+	        android:id="@+id/popup_input_label_opsi"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/maintenance_title"
+	        android:layout_below="@+id/maintenance_title"
+	        android:text="@string/option"
+	        android:layout_alignTop="@+id/popup_input_text_opsi"
+	        android:visibility="gone"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	    <EditText
+	        android:id="@+id/popup_input_text_opsi"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/popup_spinner_tipe_data"
+	        android:layout_marginRight="10dp"
+	        android:layout_marginTop="3dp"
+	        android:layout_toRightOf="@+id/form_text_label"
+	        android:hint="@string/masukkan_opsi"
+	        android:inputType="textMultiLine"
+	        android:visibility="gone" />
+
+	    <TextView
+	        android:id="@+id/form_text_placeholder"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/form_text_label"
+	        android:layout_margin="10dp"
+	        android:text="@string/placeholder"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	</RelativeLayout>
+    
+    <View
+        android:id="@+id/popup_horizontal_line"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/popup_container_form"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="10dp"
+        android:background="@android:color/darker_gray" />
+
+    <LinearLayout
+        android:id="@+id/popup_footer"
+        android:layout_width="fill_parent"
+        android:layout_height="130dp"
+        android:layout_alignLeft="@+id/popup_container_form"
+        android:layout_below="@+id/popup_container_form"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+</RelativeLayout>

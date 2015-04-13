@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent">
+	
+    <RelativeLayout 
+        android:id="@+id/panel_form"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/panel_form_click_selector" >
+
+        <TextView
+            android:id="@+id/form_panel_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="17dp"
+            android:text="@string/title"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/orangeTua"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/form_panel_text_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/form_panel_subtitle"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/circle_round"
+            android:padding="10dp"
+            android:text="12"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/form_panel_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/form_panel_title"
+            android:layout_below="@+id/form_panel_title"
+            android:layout_marginTop="10dp"
+            android:text="@string/subtitle"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/orangeTua" />
+
+        <Button
+            android:id="@+id/form_panel_button_edit"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignLeft="@+id/form_panel_subtitle"
+            android:layout_alignTop="@+id/form_panel_text_number"
+            android:background="@drawable/button_flat_selector"
+            android:drawableLeft="@drawable/ic_action_edit"
+            android:paddingLeft="7dp"
+            android:text="" />
+
+        <Button
+            android:id="@+id/form_panel_button_remove"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignBaseline="@+id/form_panel_button_edit"
+            android:layout_alignBottom="@+id/form_panel_button_edit"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/form_panel_button_edit"
+            android:background="@drawable/button_flat_selector"
+            android:drawableLeft="@drawable/ic_action_discard"
+            android:paddingLeft="7dp" />
+        
+    </RelativeLayout>
+    
+</LinearLayout>

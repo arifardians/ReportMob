@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/rect_border" >
+
+    <RelativeLayout
+        android:id="@+id/form_blank_input_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" >
+         
+         <EditText
+             android:id="@+id/form_blank_input_text"
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="10dp"
+             android:layout_marginTop="15dp"
+             android:layout_toLeftOf="@+id/form_blank_button_add"
+             android:ems="10"
+             android:hint="@string/option" >
+
+            <requestFocus />
+        </EditText>
+        
+         <Button
+            android:id="@+id/form_blank_button_add"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="@string/add"
+            android:layout_margin="10dp" />
+        
+    </RelativeLayout>
+	
+    <View 
+        android:id="@+id/form_blank_horizontal_line"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_margin="5dp"
+        android:layout_below="@+id/form_blank_input_group" />
+    
+    <LinearLayout
+        android:id="@+id/form_blank_container"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/form_blank_horizontal_line"
+        android:layout_above="@+id/form_blank_submit"
+        android:orientation="vertical" >
+
+        
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/form_blank_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="10dp"
+        android:text="@string/submit" />
+
+</RelativeLayout>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_above="@+id/main_new_list"
+        android:background="@drawable/halfbox" >
+
+        <ImageView
+            android:id="@+id/main_new_image"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/username"
+            android:scaleType="fitXY"
+            android:src="@drawable/profilepicture_white" />
+
+        <TextView
+            android:id="@+id/form_panel_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/main_new_image"
+            android:layout_centerHorizontal="true"
+            android:text="@string/username"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+    
+    <ListView
+        android:id="@+id/main_new_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_above="@+id/main_new_horizontal_line"
+        android:background="@color/white"
+        android:visibility="visible" >
+
+    </ListView>
+	<View 
+	    android:id="@+id/main_new_horizontal_line"
+	    android:layout_height="1dp"
+	    android:layout_width="match_parent"
+	    android:background="@color/orangeMuda"
+	    android:layout_above="@+id/main_footer"/>
+    <LinearLayout
+        android:id="@+id/main_footer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical"
+        android:visibility="visible" >
+
+        <GridView
+            android:id="@+id/main_new_gridview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="2" >
+        </GridView>
+
+    </LinearLayout>
+
+    
+
+</RelativeLayout>

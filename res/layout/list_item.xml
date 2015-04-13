@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/list_selector" >
+
+    <ImageView
+        android:id="@+id/list_item_icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="10dp"
+        android:contentDescription="@string/icon_list" />
+
+    <TextView
+        android:id="@+id/list_item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/list_item_icon"
+        android:layout_toRightOf="@+id/list_item_icon"
+        android:text="@string/title"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="20dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:singleLine="true" />
+
+    <TextView
+        android:id="@+id/list_item_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/list_item_icon"
+        android:layout_alignLeft="@+id/list_item_title"
+        android:text="@string/subtitle"
+       	android:layout_marginRight="10dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:singleLine="true" />
+
+    <TextView
+        android:id="@+id/list_item_value"
+        android:layout_width="85dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/list_item_title"
+        android:layout_alignBottom="@+id/list_item_title"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="20dp"
+        android:text="@string/date"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@android:color/holo_blue_bright" />
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_alignLeft="@+id/list_item_icon"
+        android:layout_below="@+id/list_item_icon" />
+
+</RelativeLayout>

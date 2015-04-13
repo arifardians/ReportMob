@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    
+    <RelativeLayout
+        android:id="@+id/form_preview_header"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/headerColor" >
+
+        <ImageButton
+            android:id="@+id/form_preview_button_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="6dp"
+            android:background="@null"
+            android:contentDescription="@string/back"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_angle_left_selector" />
+
+        <TextView
+            android:id="@+id/form_preview_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/form_preview_button_back"
+            android:text="@string/title"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white" />
+
+    </RelativeLayout>
+    
+    
+    
+    <ScrollView android:id="@+id/form_preview_scroll" 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/form_preview_header"
+        android:visibility="visible" >
+
+			<RelativeLayout
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_marginBottom="10dp"
+			    android:layout_marginTop="10dp" >
+					<TextView
+				        android:id="@+id/form_preview_form_name"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignParentTop="true"
+				        android:layout_centerHorizontal="true"
+				        android:layout_marginTop="18dp"
+				        android:text="@string/title"
+				        android:textAppearance="?android:attr/textAppearanceLarge" />
+				
+				    <TextView
+				        android:id="@+id/form_preview_form_desc"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_below="@+id/form_preview_form_name"
+				        android:layout_centerHorizontal="true"
+				        android:text="@string/description"
+				        android:textAppearance="?android:attr/textAppearanceMedium" />
+				    
+			    <LinearLayout
+			        android:id="@+id/preview_container"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:layout_alignParentLeft="true"
+			        android:layout_marginTop="10dp"
+			        android:layout_marginBottom="10dp"
+			    	android:layout_below="@+id/form_preview_form_desc"
+			        android:orientation="vertical" >
+			
+			    </LinearLayout>
+			
+			    <Button
+			        android:id="@+id/preview_button_submit"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_alignParentRight="true"
+			        android:layout_below="@+id/preview_container"
+			        android:layout_marginBottom="30dp"
+			        android:layout_marginRight="20dp"
+			        android:layout_marginTop="22dp"
+			        android:background="@drawable/rect_blue_flat_selector"
+			        android:text="@string/submit"
+			        android:textColor="@android:color/white" />
+
+			    <View
+			        android:id="@+id/view1"
+			        android:layout_below="@+id/preview_button_submit"
+			        android:layout_width="fill_parent"
+			        android:layout_height="1dp" />
+			
+			</RelativeLayout>
+	</ScrollView>
+
+    
+
+</RelativeLayout>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.retail"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="15"
+        android:targetSdkVersion="15" />
+	
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/report_mob"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.retail.activity.SplashActivity"
+            android:label="@string/report_mob" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.retail.activity.LoginActivity"></activity>
+        <activity android:name="com.retail.activity.RegisterActivity"></activity>
+        <activity android:name="com.retail.activity.MainActivity"></activity>
+        <activity android:name="com.retail.activity.MaintenanceActivity"></activity>
+        <activity android:name="com.retail.activity.FormActivity"></activity>
+        <activity android:name="com.retail.activity.FormPreviewActivity"></activity>
+        <activity android:name="com.retail.activity.CreateOptionActivity"></activity>
+        <activity android:name="com.retail.activity.FormListActivity"></activity>
+        <activity android:name="com.retail.activity.FormTransactionActivity"></activity>
+        <activity android:name="com.retail.activity.ListTransactionActivity"></activity>
+        <activity android:name="com.retail.activity.ReportListActivity"></activity>
+        <activity android:name="com.retail.activity.TestActivity"></activity>
+        
+        <activity android:name="com.retail.activity.ReportActivity"></activity>
+        
+        <activity android:name="com.retail.activity.NewFormActivity"
+            android:label="@string/list_form"
+            android:parentActivityName="com.retail.activity.TestActivity">
+            <meta-data 
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.retail.activity.TestActivity" />
+        </activity>
+    </application>
+
+</manifest>

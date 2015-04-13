@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/form_date_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="16dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="@string/field"
+        android:singleLine="true"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
+    
+	<Button
+        android:id="@+id/form_date_button_delete"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="45dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_alignBottom="@+id/form_date_label"
+        android:background="@drawable/button_flat_selector"
+        android:drawableTop="@drawable/ic_action_discard" />
+
+    <Button
+        android:id="@+id/form_date_button_edit"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="45dp"
+        android:layout_height="40dp"
+        android:layout_alignTop="@+id/form_date_button_delete"
+        android:layout_marginRight="5dp"
+        android:layout_toLeftOf="@+id/form_date_button_delete"
+        android:background="@drawable/button_flat_selector"
+        android:drawablePadding="3dp"
+        android:drawableTop="@drawable/ic_action_edit"
+        android:minHeight="20dp"
+        android:minWidth="20dp" />
+
+    <EditText
+        android:id="@+id/form_date_input"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/form_date_label"
+        android:layout_below="@+id/form_date_label"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toLeftOf="@+id/form_date_button_pick_date"
+        android:background="@drawable/rect_border"
+        android:ems="10"
+        android:inputType="date"
+        android:paddingBottom="7dp"
+        android:paddingTop="10dp" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/form_date_button_pick_date"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignTop="@+id/form_date_input"
+        android:background="@drawable/button_flat_selector"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:drawablePadding="3dp"
+        android:drawableTop="@drawable/ic_action_go_to_today"
+        android:minHeight="20dp"
+        android:minWidth="20dp" />
+
+</RelativeLayout>

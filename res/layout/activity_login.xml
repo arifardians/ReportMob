@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background" >
+
+    <EditText
+        android:id="@+id/login_input_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/login_input_email"
+        android:layout_alignRight="@+id/login_input_email"
+        android:layout_below="@+id/login_input_email"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rect_border_solid_white"
+        android:ems="10"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:textColor="@android:color/white"
+        android:drawableLeft="@drawable/ic_action_secure"
+        android:textColorHint="@android:color/white" />
+
+    <ImageView
+        android:id="@+id/main_new_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/logo"
+        android:scaleType="fitXY"
+        android:src="@drawable/logo_trans" />
+
+    <EditText
+        android:id="@+id/login_input_email"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/main_new_image"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/rect_border_solid_white"
+        android:ems="10"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:padding="10dp"
+        android:drawableLeft="@drawable/ic_action_email"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white" />
+
+    <Button
+        android:id="@+id/login_button_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/login_input_password"
+        android:layout_alignRight="@+id/login_input_password"
+        android:layout_below="@+id/login_input_password"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/white_flat_selector"
+        android:text="@string/login"
+        android:textColor="@color/orange_gelap"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/form_preview_form_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_button_login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="@string/dont_have_an_account"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/login_text_sign_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/form_preview_form_desc"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/text_click_selector"
+        android:text="@string/sign_up"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:id="@+id/login_rellayout_loadingbar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_text_sign_up"
+        android:visibility="gone" >
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/textView1"
+            android:layout_marginRight="10dp" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/loading"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="2dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/login_rellayout_loadingbar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/view1"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@+id/view1"
+        android:background="@drawable/rect_grey_flat_selector"
+        android:drawableLeft="@drawable/ic_action_facebook"
+        android:paddingBottom="5dp"
+        android:paddingLeft="8dp"
+        android:paddingTop="5dp"
+        android:text="@string/facebook"
+        android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button1"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="15dp"
+        android:layout_toRightOf="@+id/view1"
+        android:background="@drawable/rect_grey_flat_selector"
+        android:drawableLeft="@drawable/ic_action_twitter"
+        android:paddingBottom="5dp"
+        android:paddingLeft="8dp"
+        android:paddingTop="5dp"
+        android:text="@string/twitter"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

@@ -1,0 +1,95 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/appColorBlue"
+    tools:context="com.retail.activity.MainActivity"
+    tools:ignore="MergeRootFrame" >
+
+    <Button
+        android:id="@+id/main_buttonAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="10dp"
+        android:text="@string/add_form"
+        android:visibility="gone" />
+
+    <ListView
+        android:id="@+id/main_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="10dp"
+        android:listSelector="@drawable/list_selector"
+        android:visibility="gone" >
+
+    </ListView>
+
+    <RelativeLayout
+        android:id="@+id/form_preview_header"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="10dp"
+        android:background="@color/headerColor" >
+
+        <Button
+            android:id="@+id/main_button_logout"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/logout"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/main_new_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/logo"
+            android:src="@drawable/ic_action_person" />
+
+        <TextView
+            android:id="@+id/form_preview_form_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/main_new_image"
+            android:paddingTop="5dp"
+            android:text="@string/admin"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/maintenance_button_back"
+        android:layout_width="120dp"
+        android:layout_height="80dp"
+        android:layout_below="@+id/form_preview_header"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:contentDescription="@string/logo"
+        android:src="@drawable/ic_android_white" />
+
+    <TextView
+        android:id="@+id/form_preview_form_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/maintenance_button_back"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:text="@string/report_mob"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
+
+</RelativeLayout>
