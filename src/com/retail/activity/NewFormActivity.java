@@ -32,7 +32,7 @@ public class NewFormActivity extends Activity{
 	
 	private LinearLayout container;
 	private static final String TAG ="[NewFormAct]";
-	
+	private static final int MENU_ADD_FORM = R.id.action_add_form;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -165,15 +165,15 @@ public class NewFormActivity extends Activity{
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
+		if(item.getItemId() == android.R.id.home){
 			onBackPressed();
 			return true;
-		case R.id.action_add_form:
+		}else if(item.getItemId() == MENU_ADD_FORM){
 			showInputNewForm();
 			return true;
+		}else{
+			return super.onOptionsItemSelected(item);
 		}
-		return super.onOptionsItemSelected(item);
 	}
 	
 	@Override

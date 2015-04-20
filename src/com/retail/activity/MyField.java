@@ -10,6 +10,7 @@ public class MyField {
 	private int inputType; 
 	private int dataType; 
 	private ArrayList<String> options;
+	private int order;
 	
 	public MyField(String name) {
 		this.name = name; 
@@ -33,7 +34,6 @@ public class MyField {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
 	
 	
 	public String getPlaceholder() {
@@ -68,11 +68,19 @@ public class MyField {
 		this.options = options;
 	}
 	
+	public int getOrder() {
+		return order;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
+	}
+
 	@Override
 	public String toString() {
 		
 		return "[field name : " + name + ", input type : " + MyConstant.TIPE_INPUT[inputType] 
-			 + ", data type : " + MyConstant.TIPE_DATA[dataType] + "]";
+			 + ", data type : " + MyConstant.TIPE_DATA[dataType] + ", order : "+ order +"]";
 	}
 	
 }

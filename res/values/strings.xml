@@ -76,5 +76,6 @@
     <string name="field_name">Field Name</string>
     <string name="input_type">Input Type</string>
     <string name="data_type">Data type</string>
+    <string name="count">count</string>
 
 </resources>

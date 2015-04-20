@@ -43,6 +43,34 @@
         android:drawableTop="@drawable/ic_action_edit"
         android:minHeight="20dp"
         android:minWidth="20dp" />
+    
+    <Button
+        android:id="@+id/form_date_button_down"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="45dp"
+        android:layout_height="40dp"
+        android:layout_alignTop="@+id/form_date_button_delete"
+        android:layout_marginRight="5dp"
+        android:layout_toLeftOf="@+id/form_date_button_edit"
+        android:background="@drawable/button_flat_selector"
+        android:drawablePadding="3dp"
+        android:drawableTop="@drawable/ic_action_expand"
+        android:minHeight="20dp"
+        android:minWidth="20dp" />
+    
+    <Button
+        android:id="@+id/form_date_button_up"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="45dp"
+        android:layout_height="40dp"
+        android:layout_alignTop="@+id/form_date_button_delete"
+        android:layout_marginRight="5dp"
+        android:layout_toLeftOf="@+id/form_date_button_down"
+        android:background="@drawable/button_flat_selector"
+        android:drawablePadding="3dp"
+        android:drawableTop="@drawable/ic_action_collapse"
+        android:minHeight="20dp"
+        android:minWidth="20dp" />
 
     <EditText
         android:id="@+id/form_date_input"

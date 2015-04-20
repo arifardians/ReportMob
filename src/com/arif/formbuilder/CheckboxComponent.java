@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.example.retail.R;
 import com.retail.activity.FormActivity;
+import com.retail.activity.MyField;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -29,6 +30,10 @@ public class CheckboxComponent extends FormComponent {
 	
 	private Button btnEdit; 
 	private Button btnRemove;
+	private Button btnUp;
+	private Button btnDown;
+	
+	private int order; 
 	
 	private boolean isTextFormat;
 	private String fieldName;
@@ -45,6 +50,8 @@ public class CheckboxComponent extends FormComponent {
 		label		 = (TextView) result.findViewById(R.id.form_checkbox_label); 
 		btnEdit		 = (Button) result.findViewById(R.id.form_checkbox_button_edit); 
 		btnRemove	 = (Button) result.findViewById(R.id.form_checkbox_button_delete); 
+		btnUp		 = (Button) result.findViewById(R.id.form_checkbox_button_up); 
+		btnDown		 = (Button) result.findViewById(R.id.form_checkbox_button_down);
 		
 		isEditable	 = true; 
 		isTextFormat = true;
@@ -107,10 +114,51 @@ public class CheckboxComponent extends FormComponent {
 	}
 	
 	@Override
+	protected OnClickListener actionUp() {
+		return new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				int index = formContainer.indexOfChild(result);
+				if(index > 0){
+					formContainer.removeView(result);
+					formContainer.addView(result, index-1);
+					order = index - 1;
+					
+					reOrderField(index, order);
+				}
+				
+			}
+		};
+	}
+
+	@Override
+	protected OnClickListener actionDown() {
+		return new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				int index = formContainer.indexOfChild(result);
+				if(index < formContainer.getChildCount() -1){
+					formContainer.removeView(result);
+					formContainer.addView(result, index+1);
+					order = index+1;
+					
+					reOrderField(order, index);
+				}
+				
+			}
+		};
+	}
+	
+	
+	
+	@Override
 	protected void setActionButton() {
 		btnEdit.setOnClickListener(actionEdit());
 		btnRemove.setOnClickListener(actionRemove(id));
-		
+		btnUp.setOnClickListener(actionUp()); 
+		btnDown.setOnClickListener(actionDown());
 	}
 
 	@Override
@@ -129,9 +177,13 @@ public class CheckboxComponent extends FormComponent {
 		if(isEditable){
 			btnEdit.setVisibility(View.VISIBLE); 
 			btnRemove.setVisibility(View.VISIBLE);
+			btnUp.setVisibility(View.VISIBLE);
+			btnDown.setVisibility(View.VISIBLE);
 		}else{
 			btnEdit.setVisibility(View.GONE); 
 			btnRemove.setVisibility(View.GONE);
+			btnUp.setVisibility(View.GONE);
+			btnDown.setVisibility(View.GONE);
 		}
 		
 	}
@@ -180,6 +232,7 @@ public class CheckboxComponent extends FormComponent {
 		setActionButton();	
 
 		formContainer.addView(result);
+		order = formContainer.indexOfChild(result);
 	}
 
 	@Override
@@ -251,6 +304,7 @@ public class CheckboxComponent extends FormComponent {
 		
 		formContainer.removeViewAt(indexField);
 		formContainer.addView(result, indexField);
+		order = indexField;
 	}
 
 	@Override
@@ -265,5 +319,10 @@ public class CheckboxComponent extends FormComponent {
 
 	}
 
-		
+	@Override
+	public int getOrder() {
+		return this.order;
+	}
+
+			
 }

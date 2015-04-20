@@ -2,6 +2,9 @@ package com.arif.formbuilder;
 
 import java.util.ArrayList;
 
+import com.retail.activity.FormActivity;
+import com.retail.activity.MyField;
+
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -17,8 +20,11 @@ public abstract class FormComponent {
 	abstract public String getFieldName();
 	abstract public void setPlaceholder(String placeholder);
 	abstract public String getPlaceholder();
+	abstract public int getOrder();
 	abstract protected View.OnClickListener actionEdit(); 
 	abstract protected View.OnClickListener actionRemove(long id); 
+	abstract protected View.OnClickListener actionUp();
+	abstract protected View.OnClickListener actionDown();
 	abstract protected void setActionButton();
 	
 	abstract public boolean isEditable();
@@ -37,4 +43,15 @@ public abstract class FormComponent {
 	abstract public RelativeLayout getResultView();
 	abstract public String getInputValue();
 	abstract public void setInputValue(String values);
+	
+	protected void reOrderField(int upIndex, int downIndex){
+		MyField fieldUp = FormActivity.fields.get(upIndex);
+		fieldUp.setOrder(downIndex);
+		
+		MyField fieldDown = FormActivity.fields.get(downIndex);
+		fieldDown.setOrder(upIndex);
+		
+		FormActivity.fields.set(downIndex, fieldUp);
+		FormActivity.fields.set(upIndex, fieldDown);
+	}
 }

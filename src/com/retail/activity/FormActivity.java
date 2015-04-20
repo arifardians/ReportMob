@@ -140,7 +140,7 @@ public class FormActivity extends Activity {
 		
 		for (MyField field : fields) {
 			fieldName = field.getName();
-			colName	  = fieldName.toLowerCase();
+			colName	  = fieldName.toLowerCase(Locale.getDefault());
 			colName	  = colName.replace(" ", "_");
 			formField = new FormField();
 			formField.setId(field.getId());
@@ -151,6 +151,8 @@ public class FormActivity extends Activity {
 			formField.setPlaceholder(field.getPlaceholder());
 			formField.setDataType(field.getDataType());
 			formField.setType(field.getInputType());
+			formField.setListOrder(field.getOrder());
+			Log.d(TAG, field.toString());
 			if(field.getId()== 0){
 				fieldID = fieldDAO.insert(formField);
 			}else{
@@ -375,6 +377,7 @@ public class FormActivity extends Activity {
 		fieldDao.close(); 
 		
 		for (FormField field : formFields) {
+			Log.d(TAG, field.toString());
 			createForm(field);
 		}
 		
@@ -387,6 +390,7 @@ public class FormActivity extends Activity {
 		myField.setInputType(field.getType());
 		myField.setDataType(field.getDataType()); 
 		myField.setPlaceholder(field.getPlaceholder());
+		
 		
 		if(field.getId() > 0 ){
 			FieldOptionDAO optionDAO = new FieldOptionDAO(getApplicationContext());
@@ -445,6 +449,8 @@ public class FormActivity extends Activity {
 		component.setOptions(listOptions);
 		component.setFormContainer(parentLayout);		
 		component.create();
+		
+		myField.setOrder(component.getOrder());
 		fields.add(myField);
 	}
 	
@@ -625,8 +631,9 @@ public class FormActivity extends Activity {
 		component.setOptions(myField.getOptions());
 		component.setFormContainer(parentLayout);		
 		component.update(indexField);
-				
+		
+		myField.setOrder(component.getOrder());
 		fields.set(indexField, myField);
 	}
-	
+
 }

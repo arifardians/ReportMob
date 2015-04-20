@@ -152,8 +152,7 @@ public class FormFieldDAO extends PatternDAO {
 		Cursor cursor = database.query(TABLE_NAME, TABLE_COLUMNS, 
 				DBHelper.KEY_FORM_ID + " = ? ", 
 				new String[] {String.valueOf(formId)}, 
-				null, null, null);
-		
+				null, null, DBHelper.KEY_LIST_ORDER +" ASC ");
 		if(cursor != null && cursor.moveToFirst()){
 			do {
 				field = (FormField) cursorToModel(cursor);

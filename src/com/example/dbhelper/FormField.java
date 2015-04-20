@@ -125,10 +125,9 @@ public class FormField extends Model {
 	@Override
 	public String toString() {
 		String fieldData = "Field data [ id : " + id
-				+ ", form_id : " + formId 
 				+ ", field_title : " + title
 				+ ", field_type : " + MyConstant.TIPE_INPUT[type]
-				+ ", col_name : " + colName+"]"; 
+				+ ", order : " + listOrder+"]"; 
 		
 		return fieldData;
 	}

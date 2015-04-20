@@ -81,10 +81,12 @@
             android:id="@+id/panel_chart"
             android:layout_width="match_parent"
             android:layout_height="225dp"
-            android:background="@drawable/panel_rect"
+            android:background="@color/white"
             android:orientation="vertical"
             android:paddingBottom="8dp" >
 
+			
+                    
         </LinearLayout>
 
         <RelativeLayout
@@ -164,6 +166,21 @@
             android:orientation="vertical" >
 			
         </LinearLayout>
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="fill_parent"
+            android:layout_height="3dp"
+            android:background="@drawable/panel_rect" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/panel_default_text_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical" >
 
     </LinearLayout>
 

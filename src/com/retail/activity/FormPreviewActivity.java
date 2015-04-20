@@ -235,27 +235,28 @@ public class FormPreviewActivity extends Activity {
 			Log.d(TAG, strComponents);
 			
 			long insertId = 0;
-			
+			int count;
 			for (FormComponent component : components) {
-				if(components.indexOf(component) < details.size()){
-					for (Model model : details) {
-						detail = (TransactionDetail) model; 
-						if(component.getId() == detail.getFieldId()){
+				count = 0;
+				for (Model model : details) {
+					detail = (TransactionDetail) model;
+					if(component.getId() == detail.getFieldId()){
+						detail.setFieldValue(component.getInputValue());
+						detailDAO.update(detail);
+						Log.d(TAG, "update detail transaction, id: " + detail.getId() 
+								+ ", value : " + component.getInputValue() + ", field id : " + detail.getFieldId());
+					}else{
+						count ++;
+						if(count == details.size()){
+							detail = new TransactionDetail();
+							detail.setTransactionId(transactionId);
+							detail.setFieldId(component.getId());
 							detail.setFieldValue(component.getInputValue());
-							detailDAO.update(detail);
-							Log.d(TAG, "update detail transaction, id: " + detail.getId() 
-									+ ", value : " + component.getInputValue() + ", field id : " + detail.getFieldId());
-							
+							insertId = detailDAO.insert(detail);
+							Log.d(TAG, "insert detail transaction, id: " + insertId 
+									+ ", value : " + component.getInputValue());
 						}
 					}
-				}else if(components.indexOf(component) >= details.size()){
-					detail = new TransactionDetail();
-					detail.setTransactionId(transactionId);
-					detail.setFieldId(component.getId());
-					detail.setFieldValue(component.getInputValue());
-					insertId = detailDAO.insert(detail);
-					Log.d(TAG, "insert detail transaction, id: " + insertId 
-							+ ", value : " + component.getInputValue());
 				}
 			}
 		}

@@ -28,7 +28,10 @@ public class TextComponent extends FormComponent {
 	
 	private Button btnEdit; 
 	private Button btnRemove;
+	private Button btnUp; 
+	private Button btnDown;
 	
+	private int order;
 	private boolean isTextFormat;
 	private String fieldName;
 	private String placeholder;
@@ -45,6 +48,8 @@ public class TextComponent extends FormComponent {
 		editText	= (EditText) result.findViewById(R.id.form_text_input);
 		btnEdit 	= (Button) result.findViewById(R.id.form_text_button_edit); 
 		btnRemove 	= (Button) result.findViewById(R.id.form_text_button_delete);
+		btnUp		= (Button) result.findViewById(R.id.form_text_button_up); 
+		btnDown		= (Button) result.findViewById(R.id.form_text_button_down);
 		label		= (TextView) result.findViewById(R.id.form_text_label);
 		
 		setActionButton();
@@ -102,6 +107,44 @@ public class TextComponent extends FormComponent {
 			}
 		};
 	}
+	
+	@Override
+	protected OnClickListener actionUp(){
+		return new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				int index = formContainer.indexOfChild(result);
+				if(index > 0){
+					formContainer.removeView(result);
+					formContainer.addView(result, index-1);
+					order = index -1;
+					
+					reOrderField(index, order);
+				}
+				
+			}
+		};
+	}
+	
+	@Override
+	protected OnClickListener actionDown(){
+		return new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				int index = formContainer.indexOfChild(result);
+				if(index < formContainer.getChildCount() -1){
+					formContainer.removeView(result);
+					formContainer.addView(result, index+1);
+					order = index + 1;
+					
+					reOrderField(order, index);
+				}
+				
+			}
+		};
+	}
 
 	@Override
 	public boolean isEditable() {
@@ -119,9 +162,13 @@ public class TextComponent extends FormComponent {
 		if(isEditable){
 			btnEdit.setVisibility(View.VISIBLE); 
 			btnRemove.setVisibility(View.VISIBLE);
+			btnUp.setVisibility(View.VISIBLE);
+			btnDown.setVisibility(View.VISIBLE);
 		}else{
 			btnEdit.setVisibility(View.GONE); 
 			btnRemove.setVisibility(View.GONE);
+			btnUp.setVisibility(View.GONE);
+			btnDown.setVisibility(View.GONE);
 		}
 	}
 
@@ -144,6 +191,7 @@ public class TextComponent extends FormComponent {
 		setActionButton();
 		
 		formContainer.addView(result);
+		order = formContainer.indexOfChild(result);
 	}
 
 	@Override
@@ -217,12 +265,14 @@ public class TextComponent extends FormComponent {
 		
 		formContainer.removeViewAt(indexField);
 		formContainer.addView(result, indexField);
-		
+		order = indexField;
 	}
 	
 	protected void setActionButton(){
 		btnEdit.setOnClickListener(actionEdit());
 		btnRemove.setOnClickListener(actionRemove(getId()));
+		btnUp.setOnClickListener(actionUp());
+		btnDown.setOnClickListener(actionDown());
 	}
 
 
@@ -243,6 +293,11 @@ public class TextComponent extends FormComponent {
 	public void setInputValue(String values) {
 		editText.setText(values);
 		
+	}
+
+	@Override
+	public int getOrder() {
+		return this.order;
 	}
 	
 }

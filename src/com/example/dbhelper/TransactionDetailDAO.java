@@ -3,8 +3,12 @@ package com.example.dbhelper;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
 
+import com.arif.reportpanel.StringDataRecord;
+
+import android.R.integer;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -110,6 +114,29 @@ public class TransactionDetailDAO extends PatternDAO{
 		}
 		
 		return model; 
+	}
+	
+	public ArrayList<StringDataRecord> getCountStringData(long fieldId){
+		ArrayList<StringDataRecord> records = new ArrayList<StringDataRecord>();
+		StringDataRecord record = null; 
+		
+		String sql = "SELECT DISTINCT " + DBHelper.KEY_FIELD_VALUE + 
+					 " , COUNT(" + DBHelper.KEY_ID + ") FROM " + TABLE_NAME + 
+					 " WHERE " + DBHelper.KEY_FIELD_ID + " = ? " +
+					 " GROUP BY " + DBHelper.KEY_FIELD_VALUE;
+		
+		Cursor cursor = database.rawQuery(sql, new String[] {String.valueOf(fieldId)});
+		
+		if(cursor != null && cursor.moveToFirst()){
+			do {
+				record = new StringDataRecord();
+				record.setValue(cursor.getString(0));
+				record.setTotal(cursor.getInt(1));
+				records.add(record);
+			} while (cursor.moveToNext());
+		}
+		
+		return records;
 	}
 
 	@Override

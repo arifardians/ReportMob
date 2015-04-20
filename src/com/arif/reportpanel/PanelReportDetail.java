@@ -23,6 +23,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.support.v4.widget.SlidingPaneLayout.PanelSlideListener;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -32,10 +33,12 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.arif.helper.ColorHelper;
 import com.arif.helper.DateHelper;
@@ -53,6 +56,7 @@ import com.example.dbhelper.TransactionDetail;
 import com.example.dbhelper.TransactionDetailDAO;
 import com.example.retail.R;
 import com.retail.activity.MyConstant;
+import com.test.androidcharts.LineView;
 
 @SuppressLint("InflateParams")
 public class PanelReportDetail extends AbstractPanel {
@@ -75,6 +79,8 @@ public class PanelReportDetail extends AbstractPanel {
 	private LinearLayout chartLayout;
 	private LinearLayout tableLayout;
 	
+	private LinearLayout textReportContainer;
+	
 	private Spinner axisSpinner;
 	private NoDefaultSpinner spinnerDate;
 	private Spinner spinnerTableLeft; 
@@ -82,6 +88,7 @@ public class PanelReportDetail extends AbstractPanel {
 	
 	private LayoutInflater inflater;
 	private TextView textDateInterval;
+	
 	
 	private CharSequence[] dimensions;
 	
@@ -102,6 +109,7 @@ public class PanelReportDetail extends AbstractPanel {
 		
 		spinnerTableLeft 	= (Spinner) result.findViewById(R.id.panel_default_spinner_table_left); 
 		spinnerTableRight	= (NoDefaultSpinner) result.findViewById(R.id.panel_default_spinner_table_right);
+		textReportContainer	= (LinearLayout) result.findViewById(R.id.panel_default_text_container);
 		
 		selectedFields 	= new ArrayList<Long>();
 	}
@@ -119,7 +127,6 @@ public class PanelReportDetail extends AbstractPanel {
 		setSpinnerItem();
 		if(dateField != null)
 			axisSpinner.setSelection(dimensions.length -1);
-		
 		
 		btnOptions.setOnClickListener(actionOptions());
 		axisSpinner.setOnItemSelectedListener(spinnerAction());
@@ -140,7 +147,28 @@ public class PanelReportDetail extends AbstractPanel {
 				updateChart(selectedFields.get(0), selectedFields);
 			}
 		}
+		
+		// set the string report
+		setStringReport();
 
+	}
+	
+	private void setStringReport(){
+		textReportContainer.removeAllViews();
+		FormFieldDAO fieldDAO = new FormFieldDAO(context);
+		ArrayList<FormField> fields = fieldDAO.findFieldByFormId(formId);
+		fieldDAO.close();
+		
+		PanelReportString panel = null;
+		if(fields.size() > 0 ){
+			for (FormField field : fields) {
+				if(field.getType() == MyConstant.TYPE_STRING){
+					panel = new PanelReportString(context, field.getId());
+					panel.setContainer(textReportContainer);
+					panel.create();
+				}
+			}
+		}
 	}
 	
 	
@@ -325,12 +353,12 @@ public class PanelReportDetail extends AbstractPanel {
 				chart = getScatterChart(xField, selectedFields, formId);
 				Log.d(TAG, "xField == numerik field == " + xField + " done");
 			}
+		
 		chartLayout.addView(chart);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
 	
 	protected GraphicalView getChart(long formId, ArrayList<Long> selectedFields){
 		FormDataDAO formDAO = new FormDataDAO(context);
@@ -345,11 +373,11 @@ public class PanelReportDetail extends AbstractPanel {
 		for (Long fieldId : selectedFields) {
 			try {
 				series = getSeries(formId, fieldId);
+				dataset.addSeries(series);
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			dataset.addSeries(series);
 		}
 		
 		ArrayList<XYSeriesRenderer> renderers = new ArrayList<XYSeriesRenderer>();
@@ -363,12 +391,13 @@ public class PanelReportDetail extends AbstractPanel {
 			renderer.setFillPoints(true);
 			renderer.setLineWidth(1);
 			renderer.setDisplayChartValues(true);
-			
+
 			fillLine = new FillOutsideLine(FillOutsideLine.Type.BELOW);
 			fillLine.setColor(ColorHelper.getSolidColor(numerikFieldIds.indexOf(selectedFields.get(i))));
 			renderer.addFillOutsideLine(fillLine);
 			renderers.add(renderer);
 		}
+	
 		
         
      // Creating a XYMultipleSeriesRenderer to customize the whole chart
@@ -389,6 +418,8 @@ public class PanelReportDetail extends AbstractPanel {
         multiRenderer.setXLabelsColor(Color.BLACK);
         multiRenderer.setLabelsTextSize(12);
         multiRenderer.setZoomButtonsVisible(false); 
+        multiRenderer.setZoomEnabled(false);
+        multiRenderer.setInScroll(true);
         
         GraphicalView chart = (GraphicalView) ChartFactory
         		.getTimeChartView(context,
@@ -429,30 +460,33 @@ public class PanelReportDetail extends AbstractPanel {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
 		Date date = null;
 		String fieldValue = "0";
-		for (Model model : transactions) {
-			transaction = (Transaction) model;
-			detail = (TransactionDetail) detailDAO.findByTransactionAndFieldID(transaction.getId(), fieldId);
-			dateDetail = (TransactionDetail) detailDAO.
-					findByTransactionAndFieldID(transaction.getId(), dateField.getId());
-			data = new SeriesData(); 
-			isDateValid =  data.setDate(dateDetail.getFieldValue()); 
-			Log.d(TAG, "date value : " + dateDetail.getFieldValue());
-			if(isDateValid == true){
-				if(detail == null || detail.getFieldValue() == null){
-					fieldValue = "0";
-				}else{
-					Log.d(TAG, "detail fiel val : " + detail.getFieldValue());
-					fieldValue = detail.getFieldValue();
+		try {
+			for (int i = 0; i < transactions.size(); i++) {
+				transaction = (Transaction) transactions.get(i);
+				detail = (TransactionDetail) detailDAO.findByTransactionAndFieldID(transaction.getId(), fieldId);
+				dateDetail = (TransactionDetail) detailDAO.
+						findByTransactionAndFieldID(transaction.getId(), dateField.getId());
+				data = new SeriesData(); 
+				isDateValid =  data.setDate(dateDetail.getFieldValue()); 
+				Log.d(TAG, "date value : " + dateDetail.getFieldValue());
+				if(isDateValid == true){
+					if(detail == null || detail.getFieldValue() == null){
+						fieldValue = "0";
+					}else{
+						Log.d(TAG, "detail fiel val : " + detail.getFieldValue());
+						fieldValue = detail.getFieldValue();
+					}
+					data.setValue(fieldValue);
+					date = sdf.parse(data.getDate());
+					if(DateHelper.isDateBetween(date, startDate, endDate)){
+						resultData.add(data);
+					}
 				}
-				data.setValue(fieldValue);
-				date = sdf.parse(data.getDate());
-				if(DateHelper.isDateBetween(date, startDate, endDate)){
-					resultData.add(data);
-				}
-			}else{
-				continue;
+				
 			}
 			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
 		detailDAO.close();
@@ -519,8 +553,10 @@ public class PanelReportDetail extends AbstractPanel {
         renderers.setYLabelsColor(0, Color.BLACK);
         renderers.setXLabelsColor(Color.BLACK);
         renderers.setLabelsTextSize(12);
+        renderers.setZoomEnabled(false);
         renderers.setZoomButtonsVisible(false); 
-	    
+        renderers.setInScroll(true);
+        
 		GraphicalView chart =  ChartFactory.getLineChartView(context, dataset, renderers);
 		
 		return chart;

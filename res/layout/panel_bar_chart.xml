@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <RelativeLayout
+        android:id="@+id/panel_bar_chart_header"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/panel_header" >
+
+        <TextView
+            android:id="@+id/panel_bar_chart_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:text="@string/title"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+       
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey_shadow"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/panel_bar_chart_panel"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/panel_rect"
+        android:orientation="vertical" >
+
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp" >
+
+            <LinearLayout
+                android:id="@+id/panel_bar_chart_content"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
+                android:orientation="vertical" >
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+    </LinearLayout>
+    
+    <RelativeLayout
+        android:id="@+id/panel_bar_chart_table_header"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/panel_header" >
+
+        <TextView
+            android:id="@+id/panel_bar_table_left_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:text="@string/title"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/panel_bar_table_left_text"
+            android:layout_alignBottom="@+id/panel_bar_table_left_text"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:text="@string/count"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+       
+    </RelativeLayout>
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey_shadow"
+        android:visibility="visible" />
+
+    <LinearLayout
+        android:id="@+id/panel_bar_table_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical" >
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@drawable/panel_rect" />
+
+</LinearLayout>
