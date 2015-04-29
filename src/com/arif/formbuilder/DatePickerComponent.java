@@ -64,6 +64,8 @@ public class DatePickerComponent extends FormComponent {
 		btnUp		 = (Button) result.findViewById(R.id.form_date_button_up);
 		btnDown		 = (Button) result.findViewById(R.id.form_date_button_down);
 		
+		textRequired = (TextView) result.findViewById(R.id.form_date_text_required);
+		
 		isEditable	 = true; 
 		isTextFormat = true;
 		setActionButton();

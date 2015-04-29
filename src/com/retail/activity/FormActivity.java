@@ -6,15 +6,20 @@ import java.util.Locale;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -60,11 +65,16 @@ public class FormActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
-		getActionBar().hide();
+		// getActionBar().hide();
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_form);
 		activity = this;
 		
+		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+		
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.brown_gelap)));
+	
 		formId = getIntent().getLongExtra("formId", 0);
 		FormDataDAO formDao = new FormDataDAO(getApplicationContext()); 
 		
@@ -75,6 +85,8 @@ public class FormActivity extends Activity {
 		btnBack	= (ImageButton) findViewById(R.id.add_form_button_back);
 		
 		title.setText(form.getName());
+		
+		setTitle(form.getName());
 		
 		btnBack.setOnClickListener(new View.OnClickListener() {
 			
@@ -152,11 +164,13 @@ public class FormActivity extends Activity {
 			formField.setDataType(field.getDataType());
 			formField.setType(field.getInputType());
 			formField.setListOrder(field.getOrder());
+			formField.setRequired(field.isRequired());
 			Log.d(TAG, field.toString());
 			if(field.getId()== 0){
 				fieldID = fieldDAO.insert(formField);
 			}else{
 				fieldDAO.update(formField);
+				fieldID = field.getId();
 			}
 			
 			if(field.getInputType() == MyConstant.INPUT_CHECK_BOX || 
@@ -217,11 +231,11 @@ public class FormActivity extends Activity {
 		popupWindow.setBackgroundDrawable(new BitmapDrawable());
 		
 		
-
 		final EditText inputName = (EditText) popupView.findViewById(R.id.popup_input_nama); 
 		final EditText inputPlaceholder = (EditText) popupView.findViewById(R.id.popup_input_placeholder);
 		final Spinner  spinnerTipeInput = (Spinner) popupView.findViewById(R.id.popup_spinner_tipe_input);
 		final Spinner  spinnerTipeData  = (Spinner) popupView.findViewById(R.id.popup_spinner_tipe_data); 
+		final CheckBox checkIsRequired 	= (CheckBox) popupView.findViewById(R.id.popup_check_is_required);
 		
 		
 		Button   btnSubmit = (Button) popupView.findViewById(R.id.popup_button_submit);
@@ -318,6 +332,7 @@ public class FormActivity extends Activity {
 				field.setPlaceholder(inputPlaceholder.getText().toString());
 				field.setType(spinnerTipeInput.getSelectedItemPosition()); 
 				field.setDataType(spinnerTipeData.getSelectedItemPosition());
+				field.setRequired(checkIsRequired.isChecked());
 				
 				FormFieldDAO fieldDAO = new FormFieldDAO(getApplicationContext());
 				long fieldId = fieldDAO.insert(field);
@@ -390,7 +405,7 @@ public class FormActivity extends Activity {
 		myField.setInputType(field.getType());
 		myField.setDataType(field.getDataType()); 
 		myField.setPlaceholder(field.getPlaceholder());
-		
+		myField.setRequired(field.isRequired());
 		
 		if(field.getId() > 0 ){
 			FieldOptionDAO optionDAO = new FieldOptionDAO(getApplicationContext());
@@ -446,6 +461,7 @@ public class FormActivity extends Activity {
 		component.setFieldName(field.getTitle());
 		component.setPlaceholder(field.getPlaceholder());
 		component.setEditable(true);
+		component.setRequired(field.isRequired());
 		component.setOptions(listOptions);
 		component.setFormContainer(parentLayout);		
 		component.create();
@@ -469,13 +485,19 @@ public class FormActivity extends Activity {
 		popupEdit.setTouchable(true); 
 		popupEdit.setBackgroundDrawable(new BitmapDrawable());
 		
+		final TextView textHeader 		= (TextView) popupView.findViewById(R.id.form_preview_header_text);
+		textHeader.setText("Edit Form Field");
+		
 		final EditText inputName 		= (EditText) popupView.findViewById(R.id.popup_input_nama); 
 		final EditText inputPlaceholder	= (EditText) popupView.findViewById(R.id.popup_input_placeholder);
 		final Spinner  spinnerTipeInput = (Spinner) popupView.findViewById(R.id.popup_spinner_tipe_input);
 		final Spinner  spinnerTipeData  = (Spinner) popupView.findViewById(R.id.popup_spinner_tipe_data); 
+		final CheckBox checkIsRequired 	= (CheckBox) popupView.findViewById(R.id.popup_check_is_required);
+		
 		
 		inputName.setText(myField.getName()); 
 		inputPlaceholder.setText(myField.getPlaceholder());	
+		checkIsRequired.setChecked(myField.isRequired());
 		
 		Button   btnSubmit = (Button) popupView.findViewById(R.id.popup_button_submit);
 		Button   btnCancel = (Button) popupView.findViewById(R.id.popup_button_cancel);
@@ -569,6 +591,8 @@ public class FormActivity extends Activity {
 				myField.setInputType(spinnerTipeInput.getSelectedItemPosition()); 
 				myField.setDataType(spinnerTipeData.getSelectedItemPosition()); 
 				myField.setPlaceholder(inputPlaceholder.getText().toString());
+				myField.setRequired(checkIsRequired.isChecked());
+				
 				Log.d(TAG, "done edit field id : " + editedID + ", input type : "+ MyConstant.TIPE_INPUT[myField.getInputType()]);
 				
 				int inputType = spinnerTipeInput.getSelectedItemPosition(); 
@@ -627,13 +651,30 @@ public class FormActivity extends Activity {
 		component.setId(myField.getId());
 		component.setFieldName(myField.getName()); 
 		component.setEditable(true);
+		component.setRequired(myField.isRequired());
 		component.setPlaceholder(myField.getPlaceholder());
 		component.setOptions(myField.getOptions());
-		component.setFormContainer(parentLayout);		
+		component.setFormContainer(parentLayout);
 		component.update(indexField);
 		
 		myField.setOrder(component.getOrder());
 		fields.set(indexField, myField);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			onBackPressed();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		return super.onCreateOptionsMenu(menu);
 	}
 
 }

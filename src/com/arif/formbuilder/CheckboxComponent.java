@@ -53,6 +53,8 @@ public class CheckboxComponent extends FormComponent {
 		btnUp		 = (Button) result.findViewById(R.id.form_checkbox_button_up); 
 		btnDown		 = (Button) result.findViewById(R.id.form_checkbox_button_down);
 		
+		textRequired = (TextView) result.findViewById(R.id.form_checkbox_text_required);
+				
 		isEditable	 = true; 
 		isTextFormat = true;
 		

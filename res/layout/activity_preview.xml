@@ -10,6 +10,7 @@
         android:layout_height="50dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:visibility="gone"
         android:background="@color/headerColor" >
 
         <ImageButton
@@ -49,15 +50,15 @@
 			    android:layout_height="wrap_content"
 			    android:layout_marginBottom="10dp"
 			    android:layout_marginTop="10dp" >
+
 					<TextView
-				        android:id="@+id/form_preview_form_name"
-				        android:layout_width="wrap_content"
-				        android:layout_height="wrap_content"
-				        android:layout_alignParentTop="true"
-				        android:layout_centerHorizontal="true"
-				        android:layout_marginTop="18dp"
-				        android:text="@string/title"
-				        android:textAppearance="?android:attr/textAppearanceLarge" />
+					    android:id="@+id/form_preview_form_name"
+					    android:layout_width="wrap_content"
+					    android:layout_height="wrap_content"
+					    android:layout_alignParentTop="true"
+					    android:layout_centerHorizontal="true"
+					    android:text="@string/title"
+					    android:textAppearance="?android:attr/textAppearanceLarge" />
 				
 				    <TextView
 				        android:id="@+id/form_preview_form_desc"
@@ -66,16 +67,16 @@
 				        android:layout_below="@+id/form_preview_form_name"
 				        android:layout_centerHorizontal="true"
 				        android:text="@string/description"
-				        android:textAppearance="?android:attr/textAppearanceMedium" />
+				        android:textAppearance="?android:attr/textAppearanceMedium"
+				        android:visibility="gone" />
 				    
 			    <LinearLayout
 			        android:id="@+id/preview_container"
 			        android:layout_width="fill_parent"
 			        android:layout_height="wrap_content"
 			        android:layout_alignParentLeft="true"
-			        android:layout_marginTop="10dp"
+			        android:layout_below="@+id/textView1"
 			        android:layout_marginBottom="10dp"
-			    	android:layout_below="@+id/form_preview_form_desc"
 			        android:orientation="vertical" >
 			
 			    </LinearLayout>
@@ -87,8 +88,8 @@
 			        android:layout_alignParentRight="true"
 			        android:layout_below="@+id/preview_container"
 			        android:layout_marginBottom="30dp"
-			        android:layout_marginRight="20dp"
-			        android:layout_marginTop="22dp"
+			        android:layout_marginRight="10dp"
+			        android:layout_marginTop="10dp"
 			        android:background="@drawable/rect_blue_flat_selector"
 			        android:text="@string/submit"
 			        android:textColor="@android:color/white" />
@@ -98,6 +99,17 @@
 			        android:layout_below="@+id/preview_button_submit"
 			        android:layout_width="fill_parent"
 			        android:layout_height="1dp" />
+
+			    <TextView
+			        android:id="@+id/textView1"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_below="@+id/form_preview_form_desc"
+			        android:layout_marginLeft="10dp"
+			        android:layout_marginTop="5dp"
+			        android:text="@string/is_required"
+			        android:textAppearance="?android:attr/textAppearanceSmall"
+			        android:textColor="@android:color/holo_red_dark" />
 			
 			</RelativeLayout>
 	</ScrollView>

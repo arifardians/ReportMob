@@ -14,7 +14,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	/*
 	 * Database version 
 	 */
-	public static final int VERSION  =  2;
+	public static final int VERSION  =  5;
 	
 	/**
 	 * Database name
@@ -30,6 +30,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	public static final String TABLE_FIELD_OPTIONS 	= "tb_field_options";
 	public static final String TABLE_TRANSACTION   	= "tr_form"; 
 	public static final String TABLE_TRANSACTION_DETAIL = "tr_form_dtl";		
+	public static final String TABLE_GROUP = "tb_group";
 	
 	/**
 	 * Common column names
@@ -79,7 +80,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	public static final String KEY_LIST_ORDER 	= "list_order";
 	public static final String KEY_FIELD_OPTIONS = "field_options";
 	public static final String KEY_IS_FIELD_SYS	= "is_field_sys";
-	
+	public static final String KEY_IS_REQUIRED  = "is_required";
 	/**
 	 * Field table tb_field_options
 	 */
@@ -96,6 +97,14 @@ public class DBHelper extends SQLiteOpenHelper {
 	 * Columns of table transaction detail
 	 */
 	public static final String KEY_FIELD_VALUE = "field_value";
+	
+	
+	/**
+	 * Field table group
+	 */
+	public static final String KEY_GROUP_NAME = "group_name"; 
+	public static final String KEY_GROUP_SLUG = "group_slug";
+	public static final String KEY_GROUP_EMAILS = "group_emails";
 	
 	/**
 	 * Columns of session table
@@ -135,7 +144,8 @@ public class DBHelper extends SQLiteOpenHelper {
 															KEY_COLNAME, 
 															KEY_DATA_TYPE, 
 															KEY_LIST_ORDER, 
-															KEY_IS_FIELD_SYS };
+															KEY_IS_FIELD_SYS,
+															KEY_IS_REQUIRED};
 	
 	/**
 	 * Columns of option fields table
@@ -163,6 +173,18 @@ public class DBHelper extends SQLiteOpenHelper {
 																	  KEY_FIELD_VALUE, 
 																	  KEY_CREATED_AT, 
 																	  KEY_UPDATED_AT};
+	
+	/**
+	 * Columns of group table
+	 */
+	public static final String[] TABLE_GROUP_COLUMNS 	= {	KEY_ID, 
+															KEY_GROUP_NAME, 
+															KEY_GROUP_SLUG, 
+															KEY_CREATED_AT, 
+															KEY_UPDATED_AT, 
+															KEY_CREATED_BY, 
+															KEY_UPDATED_BY};
+	
 	
 	/**
 	 * CREATE table statements sqlite
@@ -204,7 +226,8 @@ public class DBHelper extends SQLiteOpenHelper {
 								+ KEY_COLNAME + " TEXT, "
 								+ KEY_DATA_TYPE + " TEXT, "
 								+ KEY_LIST_ORDER + " INTEGER, "
-								+ KEY_IS_FIELD_SYS + " INTEGER)";
+								+ KEY_IS_FIELD_SYS + " INTEGER," 
+								+ KEY_IS_REQUIRED + " INTEGER)";
 	
 	public static final String CREATE_TABLE_FIELD_OPTIONS = "CREATE TABLE " + TABLE_FIELD_OPTIONS + " ( "
 								+ KEY_ID + " INTEGER PRIMARY KEY, "
@@ -228,6 +251,14 @@ public class DBHelper extends SQLiteOpenHelper {
 								+ KEY_FIELD_VALUE + " TEXT, "
 								+ CREATED_UPDATED_AT_SQL + " )";
 	
+	public static final String CREATE_TABLE_GROUP = "CREATE TABLE " + TABLE_GROUP +  " ( "
+								+ KEY_ID + " INTEGER PRIMARY KEY, "
+								+ KEY_GROUP_NAME + " TEXT, "
+								+ KEY_GROUP_SLUG + " TEXT, "
+								+ KEY_GROUP_EMAILS + " TEXT, "
+								+ CREATED_UPDATED_AT_SQL + " ,"
+								+ CREATED_UPDATED_BY_SQL + " )";
+	
 	public DBHelper(Context context) {
 		super(context, DATABASE_NAME, null, VERSION);
 	}
@@ -241,6 +272,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		db.execSQL(CREATE_TABLE_FIELD_OPTIONS);
 		db.execSQL(CREATE_TABLE_TRANSACTION);
 		db.execSQL(CREATE_TABLE_TRANSACTION_DETAIL);
+		db.execSQL(CREATE_TABLE_GROUP);
 	}
 
 	@Override
@@ -251,6 +283,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_FIELD_OPTIONS);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_TRANSACTION);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_TRANSACTION_DETAIL);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_GROUP);
 		// Create new table 
 		
 		onCreate(db);

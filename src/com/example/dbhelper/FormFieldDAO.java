@@ -50,6 +50,11 @@ public class FormFieldDAO extends PatternDAO {
 		FormField field = (FormField) model;
 		ContentValues values = new ContentValues(); 
 		
+		int required = 0; 
+		if(field.isRequired()){
+			required = 1;
+		}
+		
 		values.put(DBHelper.KEY_FORM_ID, field.getFormId()); 
 		values.put(DBHelper.KEY_FIELD_TITLE, field.getTitle()); 
 		values.put(DBHelper.KEY_FIELD_NAME, field.getName()); 
@@ -59,6 +64,7 @@ public class FormFieldDAO extends PatternDAO {
 		values.put(DBHelper.KEY_COLNAME, field.getColName());
 		values.put(DBHelper.KEY_DATA_TYPE, field.getDataType()); 
 		values.put(DBHelper.KEY_LIST_ORDER, field.getListOrder()); 
+		values.put(DBHelper.KEY_IS_REQUIRED, required);
 		if(field.isFieldSystem()){
 			values.put(DBHelper.KEY_IS_FIELD_SYS, 1);
 		}else {
@@ -110,6 +116,11 @@ public class FormFieldDAO extends PatternDAO {
 		FormField field = (FormField) model;
 		ContentValues values = new ContentValues(); 
 		
+		int required = 0; 
+		if(field.isRequired()){
+			required = 1;
+		}
+		
 		values.put(DBHelper.KEY_FORM_ID, field.getFormId()); 
 		values.put(DBHelper.KEY_FIELD_TITLE, field.getTitle()); 
 		values.put(DBHelper.KEY_FIELD_NAME, field.getName()); 
@@ -119,6 +130,7 @@ public class FormFieldDAO extends PatternDAO {
 		values.put(DBHelper.KEY_COLNAME, field.getColName());
 		values.put(DBHelper.KEY_DATA_TYPE, field.getDataType()); 
 		values.put(DBHelper.KEY_LIST_ORDER, field.getListOrder()); 
+		values.put(DBHelper.KEY_IS_REQUIRED, required);
 		
 		int affectedRows = database.update(TABLE_NAME, values, 
 				DBHelper.KEY_ID + " = ? ", 
@@ -193,6 +205,12 @@ public class FormFieldDAO extends PatternDAO {
 			field.setFieldSystem(true);
 		}else{
 			field.setFieldSystem(false); 
+		}
+		
+		if(cursor.getInt(11) == 1){
+			field.setRequired(true);
+		}else{
+			field.setRequired(false);
 		}
 		
 		return field;

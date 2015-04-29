@@ -7,6 +7,7 @@ public class SessionApp {
 	private String token;
 	private String secret; 
 	private String key;
+	private long clientId; 
 	
 	public SessionApp(){
 		this.id = 0; 
@@ -58,6 +59,14 @@ public class SessionApp {
 		this.key = key;
 	}
 	
+	public long getClientId() {
+		return clientId;
+	}
+
+	public void setClientId(long clientId) {
+		this.clientId = clientId;
+	}
+
 	public boolean isLogin(){
 		boolean isValidSecret 	= this.secret != null && !this.secret.equals("") && this.secret.length() >0;
 		boolean isValidKey 		= this.key 	!= null && !this.key.equals("") && this.key.length() > 0; 

@@ -51,6 +51,8 @@ public class DropdownComponent extends FormComponent{
 		btnUp		 = (Button) result.findViewById(R.id.form_dropdown_button_up);
 		btnDown		 = (Button) result.findViewById(R.id.form_dropdown_button_down);
 		
+		textRequired = (Button) result.findViewById(R.id.form_dropdown_text_required);
+		
 		isEditable	 = true; 
 		isTextFormat = true;
 		
@@ -196,10 +198,12 @@ public class DropdownComponent extends FormComponent{
 	public void create() {
 		showModifyButton(isEditable); 
 				
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, 
+		/*ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, 
 									   R.layout.spinner_item, 
 									   R.id.spinner_item_text, 
-									   listOptions);
+									   listOptions);*/
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, R.layout.spinner_item, listOptions);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner.setAdapter(adapter);
 		
 		label.setText(fieldName); 

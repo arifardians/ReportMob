@@ -3,16 +3,6 @@ package com.retail.activity;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import com.arif.formbuilder.FormPanel;
-import com.example.dbhelper.DBHelper;
-import com.example.dbhelper.FormData;
-import com.example.dbhelper.FormDataDAO;
-import com.example.dbhelper.FormField;
-import com.example.dbhelper.FormFieldDAO;
-import com.example.dbhelper.Model;
-import com.example.dbhelper.TransactionDAO;
-import com.example.retail.R;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -27,6 +17,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+
+import com.arif.formbuilder.FormPanel;
+import com.example.dbhelper.FormData;
+import com.example.dbhelper.FormDataDAO;
+import com.example.dbhelper.FormField;
+import com.example.dbhelper.FormFieldDAO;
+import com.example.dbhelper.Model;
+import com.example.dbhelper.TransactionDAO;
+import com.example.retail.R;
 
 public class NewFormActivity extends Activity{
 	

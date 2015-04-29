@@ -1,28 +1,23 @@
 package com.arif.formbuilder;
 
-import cn.pedant.SweetAlert.SweetAlertDialog;
-
-import com.example.dbhelper.FormDataDAO;
-import com.example.dbhelper.FormField;
-import com.example.retail.R;
-import com.retail.activity.FormActivity;
-import com.retail.activity.FormListActivity;
-import com.retail.activity.FormTransactionActivity;
-import com.retail.activity.ListTransactionActivity;
-
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.sax.StartElementListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
+import com.example.dbhelper.FormDataDAO;
+import com.example.retail.R;
+import com.retail.activity.FormActivity;
+import com.retail.activity.ListTransactionActivity;
 
 public class FormPanel {
 	
@@ -46,7 +41,7 @@ public class FormPanel {
 		this.context = context; 
 		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE); 
 		
-		panelLayout = (LinearLayout) inflater.inflate(R.layout.form_panel, null);
+		panelLayout 	= (LinearLayout) inflater.inflate(R.layout.form_panel, null);
 		panelView		= (RelativeLayout) panelLayout.findViewById(R.id.panel_form);
 		textTitle		= (TextView) panelLayout.findViewById(R.id.form_panel_title);
 		textSubtitle 	= (TextView) panelLayout.findViewById(R.id.form_panel_subtitle);
@@ -186,6 +181,7 @@ public class FormPanel {
 				formDao.delete(formId);
 				formDao.close();
 				sweetAlertDialog.dismiss();
+				((Activity) context).recreate();
 			}
 		});
 		alert.show();

@@ -162,7 +162,7 @@ public class PanelReportDetail extends AbstractPanel {
 		PanelReportString panel = null;
 		if(fields.size() > 0 ){
 			for (FormField field : fields) {
-				if(field.getType() == MyConstant.TYPE_STRING){
+				if(field.getDataType() == MyConstant.TYPE_STRING){
 					panel = new PanelReportString(context, field.getId());
 					panel.setContainer(textReportContainer);
 					panel.create();
@@ -336,7 +336,23 @@ public class PanelReportDetail extends AbstractPanel {
 	}
 	
 	private void updateChart(long xField, ArrayList<Long> selectedFields){
-		textDimension.setText(""+selectedFields.size()+" Dimension Graphic");
+		String panelTitle = "";
+		for (FormField field : numerikFields) {
+			for (Long idSelected : selectedFields) {
+				if(idSelected == field.getId()){
+					panelTitle += field.getTitle()+", ";
+					break;
+				}
+			}
+		}
+		
+		if(panelTitle.equals("")){
+			panelTitle = "Please select column!";
+		}else if(panelTitle.length() > 0){
+			panelTitle = panelTitle.substring(0, panelTitle.length()-2);
+		}
+		
+		textDimension.setText(panelTitle);
 		chartLayout.removeAllViews();
 		GraphicalView chart = null;
 		this.selectedFields = selectedFields;
@@ -655,7 +671,7 @@ public class PanelReportDetail extends AbstractPanel {
 		ArrayAdapter<CharSequence> dateOptionAdapter = generateAdapter(dateOptions);
 		spinnerDate.setAdapter(dateOptionAdapter);
 		
-		CharSequence[] dateGroups = {"Days", "Custom"};
+		CharSequence[] dateGroups = {"Days"};
 		ArrayAdapter<CharSequence> dateGroupAdapter = generateAdapter(dateGroups);
 		spinnerTableLeft.setAdapter(dateGroupAdapter);
 		

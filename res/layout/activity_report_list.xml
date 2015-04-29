@@ -10,7 +10,8 @@
         android:layout_height="50dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:background="@color/headerColor" >
+        android:background="@color/headerColor"
+        android:visibility="gone" >
 
         <ImageButton
             android:id="@+id/report_list_button_back"

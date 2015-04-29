@@ -51,6 +51,8 @@ public class RadioGroupComponent extends FormComponent{
 		btnUp 		 = (Button) result.findViewById(R.id.form_radio_button_up); 
 		btnDown 	 = (Button) result.findViewById(R.id.form_radio_button_down);
 		
+		textRequired = (TextView) result.findViewById(R.id.form_radio_text_required);
+		
 		isEditable	 = true; 
 		isTextFormat = true;
 		

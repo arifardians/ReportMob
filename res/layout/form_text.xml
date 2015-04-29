@@ -9,14 +9,29 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_margin="10dp"
-        android:paddingBottom="10dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="10dp"
+        android:paddingBottom="3dp"
         android:paddingTop="10dp"
-        android:text="@string/field"
         android:singleLine="true"
+        android:text="@string/field"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@android:color/black"
         android:textStyle="bold" />
+    
+      <TextView
+          android:id="@+id/form_text_required"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginRight="10dp"
+          android:layout_marginTop="14dp"
+          android:layout_toRightOf="@+id/form_text_label"
+          android:text="@string/sign_required"
+          android:textAppearance="?android:attr/textAppearanceMedium"
+          android:textColor="@android:color/holo_red_dark"
+          android:visibility="gone" />
 
     <EditText
         android:id="@+id/form_text_input"

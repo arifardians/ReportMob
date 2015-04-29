@@ -14,6 +14,7 @@ public class FormField extends Model {
 	private int dataType; 
 	private int listOrder;
 	private boolean isFieldSystem;
+	private boolean isRequired;
 	private String optionValues;
 	private String placeholder;
 	
@@ -120,6 +121,14 @@ public class FormField extends Model {
 
 	public void setPlaceholder(String placeholder) {
 		this.placeholder = placeholder;
+	}
+	
+	public boolean isRequired() {
+		return isRequired;
+	}
+
+	public void setRequired(boolean isRequired) {
+		this.isRequired = isRequired;
 	}
 
 	@Override

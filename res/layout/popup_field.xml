@@ -140,11 +140,11 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_alignLeft="@+id/maintenance_title"
+	        android:layout_alignTop="@+id/popup_input_text_opsi"
 	        android:layout_below="@+id/maintenance_title"
 	        android:text="@string/option"
-	        android:layout_alignTop="@+id/popup_input_text_opsi"
-	        android:visibility="gone"
-	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	        android:textAppearance="?android:attr/textAppearanceMedium"
+	        android:visibility="gone" />
 	
 	    <EditText
 	        android:id="@+id/popup_input_text_opsi"
@@ -167,6 +167,15 @@
 	        android:layout_margin="10dp"
 	        android:text="@string/placeholder"
 	        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+	    <CheckBox
+	        android:id="@+id/popup_check_is_required"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/popup_input_text_opsi"
+	        android:layout_toRightOf="@+id/form_text_label"
+	        android:text="@string/required"
+	        android:textColor="@android:color/holo_red_dark" />
 	
 	</RelativeLayout>
     
@@ -182,11 +191,12 @@
     <LinearLayout
         android:id="@+id/popup_footer"
         android:layout_width="fill_parent"
-        android:layout_height="130dp"
+        android:layout_height="20dp"
         android:layout_alignLeft="@+id/popup_container_form"
         android:layout_below="@+id/popup_container_form"
         android:layout_marginTop="10dp"
         android:orientation="vertical" >
+
     </LinearLayout>
 
 </RelativeLayout>

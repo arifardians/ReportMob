@@ -52,6 +52,7 @@ public class TextComponent extends FormComponent {
 		btnDown		= (Button) result.findViewById(R.id.form_text_button_down);
 		label		= (TextView) result.findViewById(R.id.form_text_label);
 		
+		textRequired = (TextView) result.findViewById(R.id.form_text_required);
 		setActionButton();
 	}
 	

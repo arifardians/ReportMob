@@ -28,26 +28,36 @@
         </activity>
         <activity android:name="com.retail.activity.LoginActivity"></activity>
         <activity android:name="com.retail.activity.RegisterActivity"></activity>
-        <activity android:name="com.retail.activity.MainActivity"></activity>
         <activity android:name="com.retail.activity.MaintenanceActivity"></activity>
         <activity android:name="com.retail.activity.FormActivity"></activity>
-        <activity android:name="com.retail.activity.FormPreviewActivity"></activity>
+        <activity android:name="com.retail.activity.TransactionActivity"></activity>
         <activity android:name="com.retail.activity.CreateOptionActivity"></activity>
         <activity android:name="com.retail.activity.FormListActivity"></activity>
-        <activity android:name="com.retail.activity.FormTransactionActivity"></activity>
         <activity android:name="com.retail.activity.ListTransactionActivity"></activity>
-        <activity android:name="com.retail.activity.ReportListActivity"></activity>
-        <activity android:name="com.retail.activity.TestActivity"></activity>
+        <activity android:name="com.retail.activity.HomeActivity"></activity>
         
+        <activity android:name="com.retail.activity.ReportListActivity"></activity>
         <activity android:name="com.retail.activity.ReportActivity"></activity>
         
+        <activity android:name="com.retail.activity.AddGroupActivity"></activity>
+        <activity android:name="com.retail.activity.GroupInviteActivity"></activity>
+        <activity android:name="com.retail.activity.GroupActivity"></activity>
+       
+        <activity android:name="com.retail.activity.GroupListActivity" 
+            android:parentActivityName="com.retail.activity.HomeActivity">
+            <meta-data 
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.retail.activity.TestActivity"/>
+        </activity>
+	
         <activity android:name="com.retail.activity.NewFormActivity"
             android:label="@string/list_form"
-            android:parentActivityName="com.retail.activity.TestActivity">
+            android:parentActivityName="com.retail.activity.HomeActivity">
             <meta-data 
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.retail.activity.TestActivity" />
         </activity>
+        
     </application>
 
 </manifest>

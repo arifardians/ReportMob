@@ -8,9 +8,12 @@ import com.retail.activity.MyField;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 public abstract class FormComponent {
 	
+	protected boolean isRequired;
+	protected TextView textRequired; 
 	
 	abstract public void setId(long id);
 	abstract public long getId();
@@ -44,6 +47,17 @@ public abstract class FormComponent {
 	abstract public String getInputValue();
 	abstract public void setInputValue(String values);
 	
+	public boolean isRequired() {
+		return isRequired;
+	}
+	public void setRequired(boolean isRequired) {
+		this.isRequired = isRequired;
+		if(isRequired){
+			textRequired.setVisibility(View.VISIBLE);
+		}else{
+			textRequired.setVisibility(View.GONE);
+		}
+	}
 	protected void reOrderField(int upIndex, int downIndex){
 		MyField fieldUp = FormActivity.fields.get(upIndex);
 		fieldUp.setOrder(downIndex);

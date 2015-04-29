@@ -8,8 +8,7 @@
         android:layout_width="fill_parent"
         android:layout_height="50dp"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:background="@color/headerColor" >
+        android:layout_alignParentTop="true" >
 
         <ImageButton
             android:id="@+id/form_list_button_back"
@@ -21,7 +20,8 @@
             android:background="@null"
             android:contentDescription="@string/back"
             android:scaleType="fitXY"
-            android:src="@drawable/icon_angle_left_selector" />
+            android:src="@drawable/icon_angle_left_selector"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/form_list_title"
@@ -31,7 +31,8 @@
             android:layout_toRightOf="@+id/form_list_button_back"
             android:text="@string/title"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/form_list_button_add"
@@ -40,7 +41,9 @@
             android:layout_alignBaseline="@+id/form_list_title"
             android:layout_alignBottom="@+id/form_list_title"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
             android:background="@drawable/rect_orange_flat_selector"
             android:text="@string/add_form"
             android:textColor="@android:color/white" />

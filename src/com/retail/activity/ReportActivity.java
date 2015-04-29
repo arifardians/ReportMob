@@ -1,7 +1,9 @@
 package com.retail.activity;
 
 import android.app.Activity;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -25,10 +27,10 @@ public class ReportActivity extends Activity{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-	/*	getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.brown_gelap)));
-	*/
-		getActionBar().hide();
+	
+//		getActionBar().hide();
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_report);
 		
@@ -49,6 +51,7 @@ public class ReportActivity extends Activity{
 		
 	}
 	
+	
 		
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -58,6 +61,11 @@ public class ReportActivity extends Activity{
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		return super.onCreateOptionsMenu(menu);
 	}
 
 }

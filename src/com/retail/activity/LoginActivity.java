@@ -54,7 +54,7 @@ public class LoginActivity extends Activity {
 		if(session != null && session.isLogin()){
 			//Log.d("[session-exist]", "token is empty? "+(session.getToken().equalsIgnoreCase("logout")));
 			
-			Intent intent = new Intent(LoginActivity.this, TestActivity.class); 
+			Intent intent = new Intent(LoginActivity.this, HomeActivity.class); 
 			startActivity(intent);
 			finish();
 		}
@@ -161,8 +161,9 @@ public class LoginActivity extends Activity {
 			});
 			
 			if(isLoginSuccess){
-				Intent intent = new Intent(LoginActivity.this, TestActivity.class);
+				Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
 				startActivity(intent);
+				finish();
 			}else{
 				this.runOnUiThread(new Runnable() {
 					

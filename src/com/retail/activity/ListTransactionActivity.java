@@ -15,6 +15,7 @@ import com.simpd.my_list_view.RowItem;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -42,7 +43,11 @@ public class ListTransactionActivity extends Activity{
 	private long[] transactionIds;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		getActionBar().hide();
+		//getActionBar().hide();
+		
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.brown_gelap)));
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_form_list);
 		
@@ -64,6 +69,7 @@ public class ListTransactionActivity extends Activity{
 		btnAdd.setOnClickListener(actionAdd());
 		btnBack.setOnClickListener(actionBack());
 		
+		setTitle(form.getName()+" transactions");
 		updateListView(getRowItemData());
 	}
 	
@@ -72,7 +78,7 @@ public class ListTransactionActivity extends Activity{
 			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(ListTransactionActivity.this, FormPreviewActivity.class); 
+				Intent intent = new Intent(ListTransactionActivity.this, TransactionActivity.class); 
 				intent.putExtra("formId", formId);
 				intent.putExtra("transactionId", 0); 
 				
@@ -130,7 +136,7 @@ public class ListTransactionActivity extends Activity{
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Intent intent = new Intent(ListTransactionActivity.this, FormPreviewActivity.class);
+				Intent intent = new Intent(ListTransactionActivity.this, TransactionActivity.class);
 				intent.putExtra("formId", formId); 
 				intent.putExtra("transactionId", transactionIds[position]);
 				startActivity(intent);
@@ -169,7 +175,7 @@ public class ListTransactionActivity extends Activity{
 		String[] menuItems = {"Edit", "Delete"}; 
 		
 		if(menuItems[menuItemIndex].equalsIgnoreCase("edit")){
-			Intent intent = new Intent(ListTransactionActivity.this, FormPreviewActivity.class);
+			Intent intent = new Intent(ListTransactionActivity.this, TransactionActivity.class);
 			intent.putExtra("formId", formId); 
 			intent.putExtra("transactionId", transactionIds[info.position]);
 			startActivity(intent);
@@ -231,6 +237,22 @@ public class ListTransactionActivity extends Activity{
 	protected void onResume() {
 		updateListView(getRowItemData());
 		super.onResume();
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			onBackPressed();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		return super.onCreateOptionsMenu(menu);
 	}
 	
 }

@@ -11,6 +11,7 @@ public class MyField {
 	private int dataType; 
 	private ArrayList<String> options;
 	private int order;
+	private boolean isRequired;
 	
 	public MyField(String name) {
 		this.name = name; 
@@ -74,6 +75,15 @@ public class MyField {
 
 	public void setOrder(int order) {
 		this.order = order;
+	}
+	
+
+	public boolean isRequired() {
+		return isRequired;
+	}
+
+	public void setRequired(boolean isRequired) {
+		this.isRequired = isRequired;
 	}
 
 	@Override

@@ -11,7 +11,8 @@
         android:layout_height="50dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:background="@color/headerColor" >
+        android:background="@color/headerColor"
+        android:visibility="gone" >
 
         <ImageButton
             android:id="@+id/add_form_button_back"
@@ -68,7 +69,7 @@
         android:layout_margin="5dp"/>
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/popup_trans_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/view1"
@@ -81,7 +82,7 @@
        	    android:id="@+id/scrollView1"
        	    android:layout_width="fill_parent"
        	    android:layout_height="fill_parent"  
-	        android:layout_below="@+id/textView1">
+	        android:layout_below="@+id/popup_trans_title">
        
        	<LinearLayout
 	        android:id="@+id/add_form_container"

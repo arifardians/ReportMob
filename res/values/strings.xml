@@ -77,5 +77,22 @@
     <string name="input_type">Input Type</string>
     <string name="data_type">Data type</string>
     <string name="count">count</string>
+    <string name="add_group_desc">Please provide group subject and optional group icon</string>
+    <string name="group_name">Group name</string>
+    <string name="add_group">Add Group</string>
+    
+    <string name="next">NEXT</string>
+    
+    <string name="add_group_participants">ADD GROUP PARTICIPANTS</string>
+    
+    <string name="invite_by_email">invite by email address</string>
+    
+    <string name="create_group">Create Group</string>
+    
+    <string name="required">Required</string>
+    
+    <string name="sign_required">*</string>
+    
+    <string name="is_required">(*) is required.</string>
 
 </resources>
