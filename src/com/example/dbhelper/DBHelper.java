@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.telephony.TelephonyManager;
 
 public class DBHelper extends SQLiteOpenHelper {
 	// Logcat tag 
@@ -14,7 +15,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	/*
 	 * Database version 
 	 */
-	public static final int VERSION  =  5;
+	public static final int VERSION  =  6;
 	
 	/**
 	 * Database name
@@ -27,24 +28,33 @@ public class DBHelper extends SQLiteOpenHelper {
 	public static final String TABLE_SESSION	 = "session";
 	public static final String TABLE_FORM		 = "tb_form"; 
 	public static final String TABLE_FIELD		 = "tb_form_field";
+	
 	public static final String TABLE_FIELD_OPTIONS 	= "tb_field_options";
 	public static final String TABLE_TRANSACTION   	= "tr_form"; 
+	
 	public static final String TABLE_TRANSACTION_DETAIL = "tr_form_dtl";		
-	public static final String TABLE_GROUP = "tb_group";
+	
+	public static final String TABLE_GROUP 			= "tb_group";
+	public static final String TABLE_GRP_USR_ACL	= "grp_usr_acl";
+	public static final String TABLE_FORM_ASSIGN 	= "form_assign"; 
+	public static final String TABLE_ACL 			= "tb_acl"; 
+	public static final String TABLE_ACL_DETAIL 	= "dtl_acl";
+	public static final String TABLE_GROUP_FORM		= "grp_form";
 	
 	/**
 	 * Common column names
 	 */
-	public static final String KEY_ID = "_id";
+	public static final String KEY_ID 			= "_id";
 	
 	public static final String KEY_FORM_ID 		= "form_id";
 	public static final String KEY_FIELD_ID		= "field_id";
 	
 	public static final String KEY_TRANSACTION_ID = "tr_form_id"; 
-	public static final String KEY_CREATED_AT = "created_at"; 
-	public static final String KEY_UPDATED_AT = "updated_at"; 
-	public static final String KEY_CREATED_BY = "created_by"; 
-	public static final String KEY_UPDATED_BY = "updated_by";
+	
+	public static final String KEY_CREATED_AT 	= "created_at"; 
+	public static final String KEY_UPDATED_AT 	= "updated_at"; 
+	public static final String KEY_CREATED_BY 	= "created_by"; 
+	public static final String KEY_UPDATED_BY 	= "updated_by";
 	
 	/**
 	 * Session Table - column names 
@@ -102,9 +112,36 @@ public class DBHelper extends SQLiteOpenHelper {
 	/**
 	 * Field table group
 	 */
-	public static final String KEY_GROUP_NAME = "group_name"; 
-	public static final String KEY_GROUP_SLUG = "group_slug";
+	public static final String KEY_GROUP_NAME 	= "group_name"; 
+	public static final String KEY_GROUP_SLUG 	= "group_slug";
 	public static final String KEY_GROUP_EMAILS = "group_emails";
+	
+	/**
+	 * group user acl 
+	 */
+	public static final String KEY_GROUP_ID = "grp_id"; 
+	public static final String KEY_USER_ID 	= "usr_id"; 
+	public static final String KEY_ACL_ID 	= "acl_id";
+	
+	
+	/**
+	 * Form Assign 
+	 */
+	public static final String KEY_ASSIGN_TO = "assign_to"; 
+	
+	
+	/**
+	 * Table ACL
+	 */
+	public static final String KEY_ACL_PRINCIPAL 		= "acl_principal"; 
+	public static final String KEY_ACL_PRINCIPAL_SLUG 	= "acl_principal_slug"; 
+	
+	
+	/**
+	 * Detail ACL
+	 */
+	public static final String KEY_ACL_ACTION 		= "acl_action"; 
+	public static final String KEY_ACL_PERMISSION 	= "acl_permission";
 	
 	/**
 	 * Columns of session table
@@ -113,7 +150,8 @@ public class DBHelper extends SQLiteOpenHelper {
 															KEY_EMAIL,
 															KEY_SECRET, 
 															KEY_KEY_SESSION,
-															KEY_TOKEN};
+															KEY_TOKEN, 
+															KEY_USER_ID};
 	
 	/**
 	 * Columns of form table
@@ -145,7 +183,9 @@ public class DBHelper extends SQLiteOpenHelper {
 															KEY_DATA_TYPE, 
 															KEY_LIST_ORDER, 
 															KEY_IS_FIELD_SYS,
-															KEY_IS_REQUIRED};
+															KEY_IS_REQUIRED,
+															KEY_CREATED_AT, 
+															KEY_UPDATED_AT};
 	
 	/**
 	 * Columns of option fields table
@@ -154,14 +194,17 @@ public class DBHelper extends SQLiteOpenHelper {
 																KEY_OPTION_NAME, 
 																KEY_OPTION_VALUE, 
 																KEY_OPTION_ORDER, 
-																KEY_FIELD_ID };
+																KEY_FIELD_ID, 
+																KEY_CREATED_AT, 
+																KEY_UPDATED_AT};
 	
 	/**
 	 * Columns of transaction table
 	 */
 	public static final String[] TABLE_TRANSACTION_COLUMNS 	= {	KEY_ID,
 																KEY_FORM_ID, 
-																KEY_RECORD_ORDER, 
+																KEY_RECORD_ORDER,
+																KEY_USER_ID,
 																KEY_CREATED_AT, 
 																KEY_UPDATED_AT, 
 																KEY_CREATED_BY,
@@ -185,7 +228,54 @@ public class DBHelper extends SQLiteOpenHelper {
 															KEY_CREATED_BY, 
 															KEY_UPDATED_BY};
 	
+	/**
+	 * Columns of tb_acl (access control list)
+	 */
+	public static final String[] TABLE_ACL_COLUMNS = { KEY_ID,
+													   KEY_ACL_PRINCIPAL,
+													   KEY_ACL_PRINCIPAL_SLUG,
+													   KEY_CREATED_AT,
+													   KEY_UPDATED_AT, 
+													   KEY_CREATED_BY, 
+													   KEY_UPDATED_BY};
 	
+	/**
+	 * Columns of tb_acl_dtl (detail acl)
+	 */
+	public static final String[] TABLE_ACL_DETAIL_COLUMNS = { KEY_ID,  
+														   KEY_ACL_ACTION, 
+														   KEY_ACL_PERMISSION, 
+														   KEY_CREATED_AT,
+														   KEY_UPDATED_AT,
+														   KEY_ACL_ID};
+	
+	/**
+	 * Columns of table grp_usr_acl
+	 */
+	public static final String[] TABLE_GRP_USR_ACL_COLUMNS = { KEY_ID, 
+															 KEY_GROUP_ID, 
+															 KEY_USER_ID, 
+															 KEY_ACL_ID, 
+															 KEY_CREATED_AT, 
+															 KEY_UPDATED_AT};
+	/**
+	 * Columns of table form_assign 
+	 */
+	public static final String[] TABLE_FORM_ASSIGN_COLUMNS = { KEY_ID, 
+															KEY_FORM_ID, 
+															KEY_ASSIGN_TO, 
+															KEY_CREATED_AT, 
+															KEY_UPDATED_AT, 
+															KEY_CREATED_BY, 
+															KEY_UPDATED_BY};
+	/**
+	 * Columns of table group_form
+	 */
+	public static final String[] TABLE_GROUP_FORM_COLUMNS = {KEY_ID, 
+															KEY_GROUP_ID, 
+															KEY_FORM_ID, 
+															KEY_CREATED_AT, 
+															KEY_UPDATED_AT};
 	/**
 	 * CREATE table statements sqlite
 	 */
@@ -194,8 +284,9 @@ public class DBHelper extends SQLiteOpenHelper {
 			  " (" + KEY_ID + " INTEGER PRIMARY KEY, "
 				   + KEY_EMAIL + " TEXT, "
 				   + KEY_SECRET + " TEXT, "
-				   + KEY_KEY_SESSION + " TEXT,"
-			  	   + KEY_TOKEN + " TEXT)";
+				   + KEY_KEY_SESSION + " TEXT, "
+			  	   + KEY_TOKEN + " TEXT, "
+			  	   + KEY_USER_ID + " INTEGER)";
 	
 	public static final String CREATED_UPDATED_AT_SQL = " " + KEY_CREATED_AT + " DATETIME, "
 															+ KEY_UPDATED_AT + " DATETIME ";
@@ -227,21 +318,30 @@ public class DBHelper extends SQLiteOpenHelper {
 								+ KEY_DATA_TYPE + " TEXT, "
 								+ KEY_LIST_ORDER + " INTEGER, "
 								+ KEY_IS_FIELD_SYS + " INTEGER," 
-								+ KEY_IS_REQUIRED + " INTEGER)";
+								+ KEY_IS_REQUIRED + " INTEGER," 
+								+ CREATED_UPDATED_AT_SQL + ", "
+								+ "FOREIGN KEY (" + KEY_FORM_ID + ") " 
+								+ "REFERENCES " + TABLE_FORM + "(" + KEY_ID + "))";
 	
 	public static final String CREATE_TABLE_FIELD_OPTIONS = "CREATE TABLE " + TABLE_FIELD_OPTIONS + " ( "
 								+ KEY_ID + " INTEGER PRIMARY KEY, "
 								+ KEY_OPTION_NAME + " TEXT, "
 								+ KEY_OPTION_VALUE + " TEXT, "
 								+ KEY_OPTION_ORDER + " INTEGER, "
-								+ KEY_FIELD_ID + " INTEGER )";
+								+ KEY_FIELD_ID + " INTEGER, " 
+								+ CREATED_UPDATED_AT_SQL + ", "
+								+ "FOREIGN KEY (" + KEY_FIELD_ID + ") " 
+								+ "REFERENCES " + TABLE_FIELD + "(" + KEY_ID + "))";
 	
 	public static final String CREATE_TABLE_TRANSACTION = "CREATE TABLE " + TABLE_TRANSACTION + " ( "
 								+ KEY_ID + " INTEGER PRIMARY KEY,  "
 								+ KEY_FORM_ID +" INTEGER, "
+								+ KEY_USER_ID + " INTEGER, "
 								+ KEY_RECORD_ORDER + " INTEGER, "
 								+ CREATED_UPDATED_AT_SQL + ", "
-								+ CREATED_UPDATED_BY_SQL + " )";
+								+ CREATED_UPDATED_BY_SQL + ", " 
+								+ "FOREIGN KEY (" + KEY_FORM_ID + ") "
+								+ "REFERENCES " + TABLE_FORM + "(" + KEY_ID + "))";
 	
 	
 	public static final String CREATE_TABLE_TRANSACTION_DETAIL = "CREATE TABLE " + TABLE_TRANSACTION_DETAIL + " ( "
@@ -249,7 +349,11 @@ public class DBHelper extends SQLiteOpenHelper {
 								+ KEY_TRANSACTION_ID + " INTEGER, "
 								+ KEY_FIELD_ID + " INTEGER, "
 								+ KEY_FIELD_VALUE + " TEXT, "
-								+ CREATED_UPDATED_AT_SQL + " )";
+								+ CREATED_UPDATED_AT_SQL + ", "
+								+ "FOREIGN KEY (" + KEY_TRANSACTION_ID + ") "
+								+ "REFERENCES " + TABLE_TRANSACTION + "(" + KEY_ID + "), "
+								+ "FOREIGN KEY (" + KEY_FIELD_ID + ") "
+								+ "REFERENCES " + TABLE_FIELD + "( " + KEY_ID + "))";
 	
 	public static final String CREATE_TABLE_GROUP = "CREATE TABLE " + TABLE_GROUP +  " ( "
 								+ KEY_ID + " INTEGER PRIMARY KEY, "
@@ -258,6 +362,48 @@ public class DBHelper extends SQLiteOpenHelper {
 								+ KEY_GROUP_EMAILS + " TEXT, "
 								+ CREATED_UPDATED_AT_SQL + " ,"
 								+ CREATED_UPDATED_BY_SQL + " )";
+	
+	
+	public static final String CREATE_TABLE_ACL = "CREATE TABLE " + TABLE_ACL + " ( "
+								+ KEY_ID + " INTEGER PRIMARY KEY, "
+								+ KEY_ACL_PRINCIPAL + " TEXT, "
+								+ KEY_ACL_PRINCIPAL_SLUG + " TEXT, "
+								+ CREATED_UPDATED_AT_SQL + ", "
+								+ CREATED_UPDATED_BY_SQL + ")";
+	
+	public static final String CREATE_TABLE_ACL_DTL = "CREATE TABLE " + TABLE_ACL_DETAIL + " ( "
+								+ KEY_ID + " INTEGER PRIMARY KEY, " 
+								+ KEY_ACL_ACTION + " TEXT, "
+								+ KEY_ACL_PERMISSION + " TEXT, "
+								+ CREATED_UPDATED_AT_SQL + ", "
+								+ KEY_ACL_ID + " INTEGER , "
+								+ "FOREIGN KEY (" + KEY_ACL_ID + ") "
+								+ "REFERENCES " + TABLE_ACL + "(" + KEY_ID + "))";
+	
+	public static final String CREATE_TABLE_GRP_USR_ACL = "CREATE TABLE " + TABLE_GRP_USR_ACL + " ( "
+								+ KEY_ID + " INTEGER PRIMARY KEY, "
+								+ KEY_GROUP_ID + " INTEGER, "
+								+ KEY_USER_ID + " INTEGER, "
+								+ KEY_ACL_ID + " INTEGER, "
+								+ CREATED_UPDATED_AT_SQL + ", "
+								+ "FOREIGN KEY (" + KEY_GROUP_ID + ") REFERENCES " + TABLE_GROUP + "(" + KEY_ID + "), "
+								+ "FOREIGN KEY (" + KEY_ACL_ID +") REFERENCES " + TABLE_ACL +"(" + KEY_ID + "))";
+	
+	public static final String CREATE_TABLE_FORM_ASSIGN = "CREATE TABLE " + TABLE_FORM_ASSIGN + "("
+								+ KEY_ID + " INTEGER PRIMARY KEY, "
+								+ KEY_FORM_ID + " INTEGER, "
+								+ KEY_ASSIGN_TO + " INTEGER, "
+								+ CREATED_UPDATED_AT_SQL + ", "
+								+ CREATED_UPDATED_BY_SQL + ", "
+								+ "FOREIGN KEY (" + KEY_FORM_ID +") REFERENCES " + TABLE_FORM +"(" + KEY_ID +"))";
+	
+	public static final String CREATE_TABLE_GROUP_FORM = "CREATE TABLE " + TABLE_GROUP_FORM + "("
+								+ KEY_ID + " INTEGER PRIMARY KEY, "
+								+ KEY_GROUP_ID + " INTEGER, "
+								+ KEY_FORM_ID + " INTEGER, "
+								+ CREATED_UPDATED_AT_SQL + ", "
+								+ "FOREIGN KEY (" + KEY_GROUP_ID + ") REFERENCES " + TABLE_GROUP +"(" + KEY_ID + "), "
+								+ "FOREIGN KEY (" + KEY_FORM_ID +") REFERENCES " + TABLE_FORM +"(" + KEY_ID + "))" ;
 	
 	public DBHelper(Context context) {
 		super(context, DATABASE_NAME, null, VERSION);
@@ -273,6 +419,12 @@ public class DBHelper extends SQLiteOpenHelper {
 		db.execSQL(CREATE_TABLE_TRANSACTION);
 		db.execSQL(CREATE_TABLE_TRANSACTION_DETAIL);
 		db.execSQL(CREATE_TABLE_GROUP);
+		db.execSQL(CREATE_TABLE_FORM_ASSIGN);
+		db.execSQL(CREATE_TABLE_GROUP_FORM); 
+		db.execSQL(CREATE_TABLE_ACL); 
+		db.execSQL(CREATE_TABLE_ACL_DTL); 
+		db.execSQL(CREATE_TABLE_GRP_USR_ACL); 
+		
 	}
 
 	@Override
@@ -284,6 +436,11 @@ public class DBHelper extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_TRANSACTION);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_TRANSACTION_DETAIL);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_GROUP);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_FORM_ASSIGN); 
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_GROUP_FORM); 
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_ACL); 
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_ACL_DETAIL); 
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_GRP_USR_ACL);
 		// Create new table 
 		
 		onCreate(db);

@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.arif.formbuilder.FormPanel;
 import com.example.dbhelper.FormData;
@@ -155,6 +157,8 @@ public class NewFormActivity extends Activity{
 			field.setColName(exampleNames[i].toLowerCase(Locale.getDefault()));
 			field.setListOrder(i); 
 			field.setFormId(formId);
+			field.setRequired(true);
+			
 			insertId = fieldDao.insert(field);
 			Log.d(TAG, "inserting field with id : " + insertId + ", detail field : " + field.toString());
 		}
@@ -168,7 +172,10 @@ public class NewFormActivity extends Activity{
 			onBackPressed();
 			return true;
 		}else if(item.getItemId() == MENU_ADD_FORM){
-			showInputNewForm();
+			// showInputNewForm();
+			TelephonyManager tm = (TelephonyManager) getSystemService(TELEPHONY_SERVICE); 
+			String deviceId = tm.getDeviceId(); 
+			Toast.makeText(getApplicationContext(), "Device id : " + deviceId, Toast.LENGTH_LONG).show();
 			return true;
 		}else{
 			return super.onOptionsItemSelected(item);

@@ -1,6 +1,8 @@
 package com.arif.helper;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.telephony.TelephonyManager;
 
 public class ColorHelper {
 	public static final int RED 	= Color.parseColor("#F44336");
